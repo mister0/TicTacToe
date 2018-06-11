@@ -43,7 +43,7 @@ public class Board {
 		if (!checkCellAvailability(move.getX(), move.getY())) {
 			printBoard();
 			throw new NotAvailableMoveException(
-					String.format("The cell you want to mark is already marked with symbol ", board[move.getX()][move.getY()]));
+					String.format("The cell you want to mark is already marked with symbol %s", board[move.getX()][move.getY()]));
 		}
 	}
 

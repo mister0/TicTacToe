@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import exceptions.InvalidConfigurationException;
+import exceptions.NotAvailableMoveException;
 import move.Move;
 import players.HumanPlayer;
 import players.PLAYERTYPE;
@@ -49,6 +50,19 @@ public class BoardTest extends BaseTest{
     	b.mark(new Move(2,2,this.player));
         Assert.assertTrue(b.checkCellAvailability(0, 0));
         Assert.assertFalse(b.checkCellAvailability(1, 1));
+    }
+    
+    @Test
+    public void testCheckMoveAvailability() throws InvalidConfigurationException {
+    	Board b = new Board(3) ;    	
+    	Move move = new Move(2,2,this.player) ;
+    	b.mark(move);
+    	try{
+    		b.checkMoveAvailability(move);
+        	Assert.fail("Expected NotAvailableMoveException");
+    	}catch(NotAvailableMoveException ex){
+    		Assert.assertEquals(ex.getMessage(), "The cell you want to mark is already marked with symbol X");
+    	}
     }
     
     @Test
